@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Claude-inspired warm palette */
+    --background: 40 33% 96%;          /* #FAF7F0 cream */
+    --foreground: 22 30% 14%;           /* #2E1F12 dark brown */
+
+    --card: 0 0% 100%;                  /* pure white */
+    --card-foreground: 22 30% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 22 30% 14%;
+
+    --primary: 16 60% 58%;              /* #CC785C Claude orange */
+    --primary-foreground: 40 33% 96%;
+
+    --secondary: 32 40% 88%;            /* warm tan */
+    --secondary-foreground: 22 30% 14%;
+
+    --muted: 36 30% 92%;                /* slightly darker cream */
+    --muted-foreground: 25 18% 38%;
+
+    --accent: 22 70% 90%;               /* peachy */
+    --accent-foreground: 22 30% 14%;
+
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 40 33% 96%;
+
+    --border: 22 30% 14%;               /* same as foreground for brutal contrast */
+    --input: 22 30% 14%;
+    --ring: 16 60% 58%;
+
+    --radius: 0.375rem;
+
+    /* Neobrutalism shadow color */
+    --shadow-color: 22 30% 14%;
+  }
+
+  .dark {
+    --background: 22 25% 10%;
+    --foreground: 40 33% 96%;
+    --card: 22 22% 14%;
+    --card-foreground: 40 33% 96%;
+    --popover: 22 22% 14%;
+    --popover-foreground: 40 33% 96%;
+    --primary: 16 65% 62%;
+    --primary-foreground: 22 25% 10%;
+    --secondary: 22 18% 22%;
+    --secondary-foreground: 40 33% 96%;
+    --muted: 22 18% 18%;
+    --muted-foreground: 32 15% 65%;
+    --accent: 22 25% 24%;
+    --accent-foreground: 40 33% 96%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 40 33% 96%;
+    --border: 40 33% 96%;
+    --input: 40 33% 96%;
+    --ring: 16 65% 62%;
+    --shadow-color: 40 33% 96%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4 { @apply font-bold tracking-tight; }
+}
+
+@layer utilities {
+  .shadow-brutal {
+    box-shadow: 4px 4px 0 0 hsl(var(--shadow-color));
+  }
+  .shadow-brutal-sm {
+    box-shadow: 2px 2px 0 0 hsl(var(--shadow-color));
+  }
+  .shadow-brutal-lg {
+    box-shadow: 6px 6px 0 0 hsl(var(--shadow-color));
+  }
+  .shadow-brutal-hover {
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .shadow-brutal-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 hsl(var(--shadow-color));
+  }
+  .shadow-brutal-press:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 hsl(var(--shadow-color));
+  }
+}
