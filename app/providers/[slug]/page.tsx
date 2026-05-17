@@ -50,7 +50,7 @@ export default function ProviderDetailPage({
   return (
     <>
       <SiteHeader />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto py-6 sm:py-8">
         <Link
           href="/"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
@@ -58,19 +58,19 @@ export default function ProviderDetailPage({
           <ArrowLeft className="h-4 w-4" /> Semua provider
         </Link>
 
-        <header className="mt-4 flex flex-col gap-3 border-b pb-6 md:flex-row md:items-start md:justify-between">
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
+        <header className="mt-4 flex flex-col gap-4 border-b pb-6 md:flex-row md:items-start md:justify-between">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               {provider.logo && (
-                <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-md border-2 border-border bg-white shadow-brutal-sm">
+                <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-md border-2 border-border bg-white shadow-brutal-sm sm:h-12 sm:w-12">
                   <img
                     src={withBasePath(provider.logo)}
                     alt={`${provider.name} logo`}
-                    className="h-9 w-9 object-contain"
+                    className="h-8 w-8 object-contain sm:h-9 sm:w-9"
                   />
                 </span>
               )}
-              <h1 className="text-3xl font-bold tracking-tight">
+              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 {provider.name}
               </h1>
               <AccessBadge type={provider.accessType} />
@@ -78,7 +78,7 @@ export default function ProviderDetailPage({
                 <Badge variant="secondary">OpenAI-compatible</Badge>
               )}
             </div>
-            <p className="text-muted-foreground mt-2 max-w-3xl">
+            <p className="text-muted-foreground mt-2 max-w-3xl text-sm sm:text-base">
               {provider.description}
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
@@ -87,12 +87,12 @@ export default function ProviderDetailPage({
               ))}
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="-mx-1 flex flex-nowrap gap-2 overflow-x-auto px-1 scrollbar-none md:flex-wrap md:overflow-visible">
             <a
               href={provider.website}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+              className="inline-flex shrink-0 items-center gap-1 rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
             >
               Website <ExternalLink className="h-3 w-3" />
             </a>
@@ -101,7 +101,7 @@ export default function ProviderDetailPage({
                 href={provider.docsUrl}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+                className="inline-flex shrink-0 items-center gap-1 rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
               >
                 Docs <ExternalLink className="h-3 w-3" />
               </a>
@@ -111,7 +111,7 @@ export default function ProviderDetailPage({
                 href={provider.signupUrl}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:bg-primary/90"
+                className="inline-flex shrink-0 items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:bg-primary/90"
               >
                 Sign up <ExternalLink className="h-3 w-3" />
               </a>
@@ -120,14 +120,16 @@ export default function ProviderDetailPage({
         </header>
 
         <Tabs defaultValue="clients" className="mt-6">
-          <TabsList>
-            <TabsTrigger value="clients">Clients</TabsTrigger>
-            <TabsTrigger value="capabilities">Capabilities</TabsTrigger>
-            <TabsTrigger value="models">Models</TabsTrigger>
-            <TabsTrigger value="access">Access & Limits</TabsTrigger>
-            <TabsTrigger value="signup">Sign-up</TabsTrigger>
-            <TabsTrigger value="proscons">Pros / Cons</TabsTrigger>
-          </TabsList>
+          <div className="-mx-4 overflow-x-auto px-4 scrollbar-none sm:mx-0 sm:overflow-visible sm:px-0">
+            <TabsList className="w-max sm:w-auto">
+              <TabsTrigger value="clients">Clients</TabsTrigger>
+              <TabsTrigger value="capabilities">Capabilities</TabsTrigger>
+              <TabsTrigger value="models">Models</TabsTrigger>
+              <TabsTrigger value="access">Access & Limits</TabsTrigger>
+              <TabsTrigger value="signup">Sign-up</TabsTrigger>
+              <TabsTrigger value="proscons">Pros / Cons</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="clients">
             <ClientSupportSection provider={provider} />
@@ -138,7 +140,7 @@ export default function ProviderDetailPage({
           </TabsContent>
 
           <TabsContent value="models">
-            <div className="mb-3 flex items-center justify-between gap-3 text-xs">
+            <div className="mb-3 flex flex-col gap-2 text-xs sm:flex-row sm:items-center sm:justify-between">
               <p className="text-muted-foreground">
                 Skor SWE-bench Verified diambil dari leaderboard publik.
               </p>
@@ -146,15 +148,15 @@ export default function ProviderDetailPage({
                 href={SWE_BENCH_URL}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-1 rounded-sm border-2 border-border bg-amber-300 px-2 py-1 font-bold text-amber-950 shadow-brutal-sm hover:-translate-y-0.5 transition-transform"
+                className="inline-flex w-fit items-center gap-1 rounded-sm border-2 border-border bg-amber-300 px-2 py-1 font-bold text-amber-950 shadow-brutal-sm hover:-translate-y-0.5 transition-transform"
               >
                 <Trophy className="h-3 w-3" />
                 SWE-bench Verified
                 <ExternalLink className="h-3 w-3 opacity-70" />
               </a>
             </div>
-            <div className="overflow-hidden rounded-lg border">
-              <table className="w-full text-sm">
+            <div className="overflow-x-auto rounded-lg border">
+              <table className="w-full min-w-[640px] text-sm">
                 <thead className="bg-muted/50 text-left text-xs uppercase text-muted-foreground">
                   <tr>
                     <th className="px-4 py-2.5">Model</th>

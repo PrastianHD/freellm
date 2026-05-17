@@ -55,14 +55,14 @@ export function ProviderCard({
     >
       <div className={cn("h-2 w-full border-b-2 border-border", v.stripe)} />
 
-      <div className={cn("p-5", featured && "p-6 md:p-7")}>
+      <div className={cn("p-4 sm:p-5", featured && "p-5 sm:p-6 md:p-7")}>
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3">
             <span
               className={cn(
-                "grid place-items-center overflow-hidden rounded-sm border-2 border-border font-black shadow-brutal-sm",
+                "grid shrink-0 place-items-center overflow-hidden rounded-sm border-2 border-border font-black shadow-brutal-sm",
                 provider.logo ? "bg-white" : v.chip,
-                featured ? "h-14 w-14 text-2xl" : "h-10 w-10 text-sm"
+                featured ? "h-12 w-12 text-xl sm:h-14 sm:w-14 sm:text-2xl" : "h-10 w-10 text-sm"
               )}
             >
               {provider.logo ? (
@@ -71,18 +71,18 @@ export function ProviderCard({
                   alt={`${provider.name} logo`}
                   className={cn(
                     "object-contain",
-                    featured ? "h-10 w-10" : "h-7 w-7"
+                    featured ? "h-9 w-9 sm:h-10 sm:w-10" : "h-7 w-7"
                   )}
                 />
               ) : (
                 initials(provider.name)
               )}
             </span>
-            <div>
+            <div className="min-w-0">
               <h3
                 className={cn(
-                  "font-black tracking-tight leading-none",
-                  featured ? "text-2xl md:text-3xl" : "text-lg"
+                  "font-black tracking-tight leading-none truncate",
+                  featured ? "text-xl sm:text-2xl md:text-3xl" : "text-lg"
                 )}
               >
                 {provider.name}
@@ -101,15 +101,15 @@ export function ProviderCard({
           <ArrowUpRight
             className={cn(
               "shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
-              featured ? "h-7 w-7" : "h-5 w-5"
+              featured ? "h-6 w-6 sm:h-7 sm:w-7" : "h-5 w-5"
             )}
           />
         </div>
 
         <p
           className={cn(
-            "mt-4 text-muted-foreground",
-            featured ? "text-base md:text-lg max-w-2xl" : "line-clamp-2 text-sm"
+            "mt-3 text-muted-foreground sm:mt-4",
+            featured ? "text-sm sm:text-base md:text-lg max-w-2xl" : "line-clamp-2 text-sm"
           )}
         >
           {provider.description}
@@ -117,8 +117,8 @@ export function ProviderCard({
 
         <div
           className={cn(
-            "mt-5 grid gap-3",
-            featured ? "grid-cols-3 md:grid-cols-4" : "grid-cols-2"
+            "mt-4 grid gap-2 sm:mt-5 sm:gap-3",
+            featured ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-4" : "grid-cols-2"
           )}
         >
           {isCreditBased ? (
@@ -170,23 +170,25 @@ export function ProviderCard({
           )}
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-1.5">
+        <div className="mt-4 flex flex-wrap items-center gap-1.5 sm:mt-5">
           {modalities.map((m, i) => (
             <span
               key={m}
-              style={{ transform: `rotate(${(i % 2 === 0 ? -1 : 1) * 1.5}deg)` }}
-              className="inline-block"
+              style={{
+                ["--card-rot" as string]: `${(i % 2 === 0 ? -1 : 1) * 1.5}deg`,
+              }}
+              className="inline-block sm:[transform:rotate(var(--card-rot))]"
             >
               <ModalityBadge modality={m} />
             </span>
           ))}
           {provider.openaiCompatible && (
-            <span style={{ transform: "rotate(-2deg)" }} className="inline-block">
+            <span className="inline-block sm:[transform:rotate(-2deg)]">
               <Badge variant="info">OpenAI-compat</Badge>
             </span>
           )}
           {isCreditBased && (
-            <span style={{ transform: "rotate(2deg)" }} className="inline-block">
+            <span className="inline-block sm:[transform:rotate(2deg)]">
               <Badge variant="warning" className="gap-1">
                 <Wallet className="h-3 w-3" /> Credits
               </Badge>
